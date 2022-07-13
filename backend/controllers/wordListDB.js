@@ -1,4 +1,6 @@
-const fs = require('fs')
+const fs = require('fs');
+const { Stream } = require('stream');
+const path = require('path')
 
 const Words = {}
 console.log("in Word list file")
@@ -8,7 +10,15 @@ const map = new Map();
 // that can be made from the letters
 function createWordMap() {
     console.log("in Word list creator")
-    const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
+    //const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
+    const words = fs.readFileSync(path.join(__dirname, 'wordList2.txt'), 'utf-8').toString().split('\r\n');
+    // // const stream = fs.createReadStream('backend/controllers/wordList2.txt', 'utf-8')
+    // const stream = fs.createReadStream(path.join(__dirname, 'wordList2.txt'), 'utf-8')
+    // stream.on('data', (chunk) => {
+    //      console.log(chunk, "yo")
+    // })
+
+
     console.log(words[1], words[2])
     for (let i = 0; i < words.length; i++) {
         let sortedWord = words[i].split('').sort().join("");

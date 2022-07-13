@@ -8,7 +8,7 @@ const map = new Map();
 // that can be made from the letters
 function createWordMap() {
     console.log("in Word list creator")
-    const words = fs.readFileSync('backend/controllers/wordList.txt', 'utf-8').toString().split('\r\n');
+    const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
     for (let i = 0; i < words.length; i++) {
         let sortedWord = words[i].split('').sort().join("");
         if (!map.has(sortedWord)) {

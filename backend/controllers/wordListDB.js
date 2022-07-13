@@ -1,12 +1,13 @@
 const fs = require('fs')
 
 const Words = {}
-
+console.log("in Word list file")
 const map = new Map();
 // reads in text file of around 300k legal scrabble words from Collins Scrabble Words 2019
 // puts all the words into map with the key being the sorted letters and value is an array of words
 // that can be made from the letters
 function createWordMap() {
+    console.log("in Word list creator")
     const words = fs.readFileSync('backend/controllers/wordList.txt', 'utf-8').toString().split('\r\n');
     for (let i = 0; i < words.length; i++) {
         let sortedWord = words[i].split('').sort().join("");
@@ -23,6 +24,7 @@ createWordMap();
 Words.map = map;
 // takes a string and returns all the words can can be made from the letters
 Words.getWords = function getAllWords(word) {
+    console.log("in get words")
     if (!word) {
         return ''
     }

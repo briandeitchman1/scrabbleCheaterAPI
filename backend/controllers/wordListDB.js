@@ -8,7 +8,7 @@ const map = new Map();
 // that can be made from the letters
 function createWordMap() {
     console.log("in Word list creator")
-    const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
+    const words = fs.readFileSync('backend/controllers/wordList.txt', 'utf-8').toString().split('\r\n');
     for (let i = 0; i < words.length; i++) {
         let sortedWord = words[i].split('').sort().join("");
         if (!map.has(sortedWord)) {
@@ -20,10 +20,12 @@ function createWordMap() {
     }
 }
 
-createWordMap();
-Words.map = map;
+// createWordMap();
+// Words.map = map;
 // takes a string and returns all the words can can be made from the letters
 Words.getWords = function getAllWords(word) {
+    createWordMap();
+    Words.map = map;
     console.log("in get words")
     if (!word) {
         return ''
@@ -56,7 +58,7 @@ function findShorterWords(map, newKey, searchedLetters, scrabbleAnswers) {
         }
     }
 }
-console.log(Words.map.get("DGO"))
+console.log(map.get("DGO"))
 
 //console.log(Words.getWords("begin"))
 module.exports = Words;

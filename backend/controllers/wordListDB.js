@@ -10,16 +10,6 @@ const map = new Map();
 // puts all the words into map with the key being the sorted letters and value is an array of words
 // that can be made from the letters
 function createWordMap() {
-    console.log("in Word list creator")
-    //const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
-    //const words = fs.readFileSync(path.join(__dirname, 'wordList.txt'), 'utf-8').toString().split('\r\n');
-    // // const stream = fs.createReadStream('backend/controllers/wordList2.txt', 'utf-8')
-    // const stream = fs.createReadStream(path.join(__dirname, 'wordList2.txt'), 'utf-8')
-    // stream.on('data', (chunk) => {
-    //      console.log(chunk, "yo")
-    // })
-
-
     console.log(words[1], words[2])
     for (let i = 0; i < words.length; i++) {
 
@@ -29,13 +19,8 @@ function createWordMap() {
             map.set(sortedWord, arr);
         } else {
             map.get(sortedWord).push(words[i])
-            //console.log(sortedWord)
         }
     }
-    // console.log(map.size)
-    console.log(map.get("aoz"))
-
-
 }
 
 
@@ -43,8 +28,6 @@ createWordMap();
 Words.map = map;
 // takes a string and returns all the words can can be made from the letters
 Words.getWords = function getAllWords(word) {
-    //createWordMap();
-    //Words.map = map;
     console.log("in get words")
     if (!word) {
         return ''
@@ -79,5 +62,4 @@ function findShorterWords(map, newKey, searchedLetters, scrabbleAnswers) {
 }
 console.log(map.get("dgo"))
 
-//console.log(Words.getWords("begin"))
 module.exports = Words;

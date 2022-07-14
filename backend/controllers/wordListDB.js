@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Stream } = require('stream');
 const path = require('path')
+const words = require('./dictionary.json')
 
 const Words = {}
 console.log("in Word list file")
@@ -11,7 +12,7 @@ const map = new Map();
 function createWordMap() {
     console.log("in Word list creator")
     //const words = fs.readFileSync('backend/controllers/wordList2.txt', 'utf-8').toString().split('\r\n');
-    const words = fs.readFileSync(path.join(__dirname, 'wordList2.txt'), 'utf-8').toString().split('\r\n');
+    //const words = fs.readFileSync(path.join(__dirname, 'wordList.txt'), 'utf-8').toString().split('\r\n');
     // // const stream = fs.createReadStream('backend/controllers/wordList2.txt', 'utf-8')
     // const stream = fs.createReadStream(path.join(__dirname, 'wordList2.txt'), 'utf-8')
     // stream.on('data', (chunk) => {
@@ -21,28 +22,34 @@ function createWordMap() {
 
     console.log(words[1], words[2])
     for (let i = 0; i < words.length; i++) {
+
         let sortedWord = words[i].split('').sort().join("");
         if (!map.has(sortedWord)) {
             let arr = [words[i]];
             map.set(sortedWord, arr);
         } else {
             map.get(sortedWord).push(words[i])
+            //console.log(sortedWord)
         }
     }
-    console.log(map.size)
+    // console.log(map.size)
+    console.log(map.get("aoz"))
+
+
 }
 
-// createWordMap();
-// Words.map = map;
+
+createWordMap();
+Words.map = map;
 // takes a string and returns all the words can can be made from the letters
 Words.getWords = function getAllWords(word) {
-    createWordMap();
-    Words.map = map;
+    //createWordMap();
+    //Words.map = map;
     console.log("in get words")
     if (!word) {
         return ''
     }
-    word = word.toUpperCase()
+    word = word.toLowerCase();
     const sortedWord = word.split('').sort().join('');
     const searchedLetters = []
     let scrabbleAnswers = []
@@ -70,7 +77,7 @@ function findShorterWords(map, newKey, searchedLetters, scrabbleAnswers) {
         }
     }
 }
-console.log(map.get("DGO"))
+console.log(map.get("dgo"))
 
 //console.log(Words.getWords("begin"))
 module.exports = Words;
